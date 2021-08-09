@@ -31,6 +31,7 @@ from typing import Dict
 
 from kedro.pipeline import Pipeline
 
+from crypscrap.pipelines import scrapers as sc
 
 def register_pipelines() -> Dict[str, Pipeline]:
     """Register the project's pipelines.
@@ -38,4 +39,9 @@ def register_pipelines() -> Dict[str, Pipeline]:
     Returns:
         A mapping from a pipeline name to a ``Pipeline`` object.
     """
-    return {"__default__": Pipeline([])}
+    cryp_scrap_pipeline = sc.create_pipeline()
+
+    return {
+        "__default__": cryp_scrap_pipeline,
+        "sc": cryp_scrap_pipeline,
+    }
